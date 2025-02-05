@@ -1,18 +1,15 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build and Push Docker Image') {
+        stage('Checkout') {
             steps {
-                // Grant executable permissions to the build script
-                sh 'chmod +x deploy.sh'
-
-                // Build the Docker image using the build script
-                sh './deploy.sh'
-
-                
+                git branch: 'main', url: 'https://github.com/THIYANESH1333/GUVI_DEVOPS.git'
             }
         }
-
+        stage('Load Jenkinsfile') {
+            steps {
+                load 'pipeline/Jenkinsfile'
+            }
+        }
     }
 }
